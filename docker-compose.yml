@@ -16,6 +16,7 @@ services:
       - mysql-data:/var/lib/mysql  # Mount the volume for MySQL data storage
     networks:
       - twotier
+    restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
       interval: 10s
@@ -26,8 +27,8 @@ services:
     build:
       context: .
     ports:
-      - "5001:5000"
     environment:
+
       MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: root
